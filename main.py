@@ -1,106 +1,122 @@
+
 import os
-tarefas = []
 
-    
-def menu_opcoes():
+tasks = []
+
+
+def display_menu():
     os.system('cls')
-    print('1. Adicionar tarefa')
-    print('2. Visualizar tarefas')
-    print('3. Remover tarefa')
-    print('4. Sair')
-    
+    print('1. Add task')
+    print('2. View tasks')
+    print('3. Remove task')
+    print('4. Exit')
 
-def finalizar_app():
-    exibir_subtitulo('Finalizando app')
 
-def exibir_subtitulo(texto):
+def finish_app():
+    display_subtitle('Closing application')
+
+
+def display_subtitle(text):
     os.system('cls')
-    linha = '*' * (len(texto))
-    print(linha)
-    print(texto)
-    print(linha)
+    line = '*' * len(text)
+    print(line)
+    print(text)
+    print(line)
     print()
- 
-def escolher_opcao():
+
+
+def choose_option():
     try:
-        opcao = int(input('Escolha uma opção: '))
+        option = int(input('Choose an option: '))
     except ValueError:
-        print('Erro: Digite um número!')
-        voltar_ao_menu_principal()
+        print('Error: Please enter a number!')
+        return_to_main_menu()
         return
-    if opcao < 1 or opcao > 4:
-        opcao_invalida()
-    if opcao == 1:
-        adicionar_tarefa()
-    elif opcao == 2:
-        visualizar_tarefas()
-    elif opcao == 3:
-        remover_tarefas()
-    elif opcao == 4:
-        sair_do_programa()
+
+    if option < 1 or option > 4:
+        invalid_option()
+        return
+
+    if option == 1:
+        add_task()
+    elif option == 2:
+        view_tasks()
+    elif option == 3:
+        remove_task()
+    elif option == 4:
+        exit_program()
 
 
-        
-def voltar_ao_menu_principal():
-    input('\nDigite uma tecla para voltar ao menu principal: ')
+def return_to_main_menu():
+    input('\nPress Enter to return to the main menu: ')
     main()
 
-def opcao_invalida():
-    print('Opção Inválida! Escolha uma opção entre 1 e 4')
-    voltar_ao_menu_principal()
-    return
 
-        
-def adicionar_tarefa():
-    exibir_subtitulo('Adicionando uma taréfa: ')
-    tarefa = input('Digite a terefa: ')
-    if not tarefa.strip():
-        print('Erro: A tarefa não pode ficar vazia!')
+def invalid_option():
+    print('Invalid option! Please choose a number between 1 and 4.')
+    return_to_main_menu()
+
+
+def add_task():
+    display_subtitle('Adding a task')
+    task = input('Enter the task: ')
+
+    if not task.strip():
+        print('Error: Task cannot be empty!')
     else:
-        tarefas.append(tarefa)
-        print('Tarefa adicionada!')
-    voltar_ao_menu_principal()
-        
-       
-def visualizar_tarefas():
-    exibir_subtitulo('Lista de tarefas')      
-    if not tarefas:
-        print('Nenhuma tarefa para visualizar!')
-    else:    
-        print('Tarefas:') 
-        for indice, tarefa in enumerate(tarefas, start=1):
-            print (f'{indice}. {tarefa}')
-    voltar_ao_menu_principal()
-  
-def remover_tarefas():
-    exibir_subtitulo('Removendo uma tarefa: ') 
-    if not tarefas:
-        print('Erro: Nenhuma tarefa para remover.')
+        tasks.append(task)
+        print('Task added successfully!')
+
+    return_to_main_menu()
+
+
+def view_tasks():
+    display_subtitle('Task List')
+
+    if not tasks:
+        print('There are no tasks to display!')
     else:
-        for indice, tarefa in enumerate(tarefas, start=1):
-            print(f'Tarefas: {indice}. {tarefa}')
+        print('Tasks:')
+        for index, task in enumerate(tasks, start=1):
+            print(f'{index}. {task}')
+
+    return_to_main_menu()
+
+
+def remove_task():
+    display_subtitle('Removing a task')
+
+    if not tasks:
+        print('Error: There are no tasks to remove.')
+    else:
+        for index, task in enumerate(tasks, start=1):
+            print(f'{index}. {task}')
+
         try:
-            tarefa_numero = int(input(f'Digite a número da terefa a ser removida: '))
+            task_number = int(input('Enter the task number to remove: '))
         except ValueError:
-            print('Erro: Digite um número!')
-            voltar_ao_menu_principal()
+            print('Error: Please enter a number!')
+            return_to_main_menu()
             return
-        if 1 <= tarefa_numero <= len(tarefas):
-            remover_tarefa = tarefas.pop(tarefa_numero -1) 
-            print(f'Tarefa: {remover_tarefa} removida!')
-            voltar_ao_menu_principal()
+
+        if 1 <= task_number <= len(tasks):
+            removed_task = tasks.pop(task_number - 1)
+            print(f'Task "{removed_task}" removed successfully!')
         else:
-            print('Número da tarefa inválido!')
-            voltar_ao_menu_principal()
-        
-def sair_do_programa():
-    print('Saindo do gerenciador de tarefas. Até mais!')
-    
+            print('Invalid task number!')
+
+    return_to_main_menu()
+
+
+def exit_program():
+    print('Exiting the Task Manager. Goodbye!')
+
+
 def main():
     os.system('cls')
-    menu_opcoes()
-    escolher_opcao()
-    
+    display_menu()
+    choose_option()
+
+
 if __name__ == '__main__':
     main()
-    

@@ -21,7 +21,7 @@ A command-line task management application developed with Python.
 1. Clone this repository:
 
 ```bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/TassioTenorio/task-manager.git
 ```
 
 2. Navigate to the project folder:
